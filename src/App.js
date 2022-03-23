@@ -1,25 +1,32 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from "react";
+import "./styles.css";
+import UserList from "./UserList"
 
-function App() {
+const data = [
+  { id: 1,  name: "Ahmet",   email: "ahmet@site.com",  age: 25,  color: "lightcyan" },
+  { id: 2,  name: "Mehmet",  email: "mehmet@site.com", age: 30,  color: "honeydew"  },
+  { id: 3,  name: "Ali",     email: "ali@site.com",    age: 35,  color: "mistyrose" }
+];
+
+
+const App = () => {
+  const [users,setUsers] =useState(data)
+  const changeColor = (id,color) => {
+    setUsers(
+      users.map(user=>(user.id ===id ? {...user,color:color}:user))
+    )
+  }
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+      <header>
+        <h1>welcome!</h1>
       </header>
+      <UserList users={users} changeColor={changeColor}></UserList>
+
     </div>
   );
-}
+};
+
+
 
 export default App;
